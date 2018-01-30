@@ -1,17 +1,37 @@
 <ion-header>
-  <ion-navbar>
+  <!-- <ion-navbar>
     <ion-title>Home</ion-title>
-  </ion-navbar>
+  </ion-navbar> -->
+  <ion-toolbar>    
+    <ion-buttons left start>
+      <button ion-button icon-only color="royal">
+        <ion-icon name="person"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Home</ion-title>
+
+    <ion-buttons right end>
+      <button ion-button icon-only color="royal">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
-  <h2>Welcome to Ionic!</h2>
-  <p>
-    This starter project comes with simple tabs-based layout for apps
-    that are going to primarily use a Tabbed UI.
-  </p>
-  <p>
-    Take a look at the <code>src/pages/</code> directory to add or change tabs,
-    update any existing page or create new pages.
-  </p>
+  
+
+  <ion-list>
+
+    <ion-item  *ngFor="let item of YTItemList">
+      <ion-thumbnail item-start>
+        <img src="{{item.snippet.thumbnails.default.url}}">
+      </ion-thumbnail>
+      <h4>{{item.snippet.title}}</h4>
+      <p>{{item.snippet.channelTitle}}</p>
+      <button ion-button clear item-end>View</button>
+    </ion-item>
+
+
+  </ion-list>
 </ion-content>
