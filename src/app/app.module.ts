@@ -9,10 +9,14 @@ import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
+import { LayoutHeaderPage } from '../pages/layout-header/layout-header';
+import { SearchPage } from '../pages/search/search';
+import { DetailPage } from '../pages/detail/detail';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { SearchProvider } from '../providers/search/search';
+import { HomeProvider } from '../providers/home/home';
 
 @NgModule({
   declarations: [
@@ -20,7 +24,10 @@ import { SearchProvider } from '../providers/search/search';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LayoutHeaderPage,
+    SearchPage,
+    DetailPage
   ],
   imports: [
     BrowserModule,
@@ -34,13 +41,17 @@ import { SearchProvider } from '../providers/search/search';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    LayoutHeaderPage,
+    SearchPage,
+    DetailPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    SearchProvider
+    SearchProvider,
+    HomeProvider
   ]
 })
 export class AppModule {}

@@ -2,7 +2,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
-import { SearchProvider, YTResponce, YTItems } from '../../providers/search/search';
+import { HomeProvider, YTResponce, YTItems } from '../../providers/home/home';
+import { DetailPage } from '../detail/detail';
 
 @Component({
   selector: 'page-home',
@@ -10,10 +11,9 @@ import { SearchProvider, YTResponce, YTItems } from '../../providers/search/sear
 })
 export class HomePage {
   public YTData: YTResponce;
-  public YTItemList: YTItems;
-  public data: any = [0,1,2,3,4,5,6,7,8,9,10,11,12];
+  public YTItemList: Array<YTItems>;
 
-  constructor(public navCtrl: NavController, public searchProvider: SearchProvider){
+  constructor(public navCtrl: NavController, public homeProvider: HomeProvider){
   	
   }
 
@@ -22,13 +22,21 @@ export class HomePage {
   }
 
   initHomepage(){
-  	this.searchProvider.searchVideoByTerm().subscribe((res) => {
+  	this.homeProvider.searchVideoForHome().subscribe((res) => {
   		this.YTData = res;
   		this.YTItemList = this.YTData.items;
-  		console.log(this.YTItemList);
   	}, (err: HttpErrorResponse) => {
       console.log(err);
     });
+  }
+
+  openVideoDetail(videoId: string){
+    console.log(videoId);
+    this.navCtrl.push(DetailPage, {videoId: videoId});
+  }
+
+  downloadVideo(videoId: string){
+    console.log(videoId);
   }
 
 }

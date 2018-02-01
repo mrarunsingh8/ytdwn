@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import 'rxjs/add/operator/map';
 /*
-  Generated class for the SearchProvider provider.
+  Generated class for the HomeProvider provider.
 
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
@@ -32,6 +31,7 @@ export interface YTItems{
 		channelTitle: string,
 		liveBroadcastContent: string,
 	};
+	statistics: any;
 
 }
 
@@ -45,31 +45,25 @@ export interface YTResponce{
 }
 
 @Injectable()
-export class SearchProvider {
+export class HomeProvider {
   data: any = {
-  	url: 'https://www.googleapis.com/youtube/v3/search',
+  	url: 'https://www.googleapis.com/youtube/v3/videos',
   	apiKey: 'AIzaSyAJk1xUI72YYfBMgEc84gjHUX-k2AN6-B0',
   	maxResults: 10,
-  	part: 'snippet',
-  	order: 'viewCount'
+  	part: 'snippet,statistics', 
+  	chart: 'mostPopular'
   };
 
   constructor(public http: HttpClient) {
     console.log('Hello SearchProvider Provider');
   }
 
-  searchVideoByTerm(term?: string){
-
+  searchVideoForHome(){
   	let url = this.data.url+"?";
   	url += 'key='+this.data.apiKey;
   	url += '&maxResults='+this.data.maxResults;
   	url += '&part='+this.data.part;
-  	url += (typeof term !== 'undefined')?'&q='+term:'';
-  	
-  	if(typeof term !== 'undefined'){
-  		url += '&order='+this.data.order;
-  	}
-  	console.log(url);
+  	url += '&chart='+this.data.chart;
   	return this.http.get<YTResponce>(url, {}).map(res => res);
   }
 
